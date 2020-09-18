@@ -1,0 +1,11 @@
+spring:
+    thymeleaf:
+        mode: HTML5
+        check-template-location: true
+        check-template: true
+        suffix: .html
+        encoding: UTF-8
+        cache: false
+    profiles:
+        active: dev
+
