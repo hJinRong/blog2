@@ -4,14 +4,7 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
-
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-  logging:
-    level:
-      root: info
-      com.blog: info
-    file:
-      path: log/blog-dev.log

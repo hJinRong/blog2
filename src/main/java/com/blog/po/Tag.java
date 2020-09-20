@@ -2,6 +2,7 @@ package com.blog.po;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ public class Tag {
     @Id
     @GeneratedValue
     private Long id;
+    @NotBlank(message = "分类名称不能为空")
     private String name;
 
     @ManyToMany(mappedBy = "tags")
@@ -34,6 +36,14 @@ public class Tag {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Blog> getBlogs() {
+        return blogs;
+    }
+
+    public void setBlogs(List<Blog> blogs) {
+        this.blogs = blogs;
     }
 
     @Override

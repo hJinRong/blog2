@@ -2,6 +2,11 @@ body {
     background: url("../image/bg.png");
 }
 
+body > div {
+    min-height: 50%;
+
+}
+
 .m-padded-mini{
     padding: 0.2em!important;
 }
