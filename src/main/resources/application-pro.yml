@@ -10,10 +10,11 @@ spring:
       ddl-auto: none
     show-sql: true
   logging:
+    file:
+      name: log-pro.log
+      classpath: log/log-pro.log
     level:
-      root: warn
       com.blog: info
-  file:
-    path: log/blog-pro.log
-  server:
-    port: 8089
+  rsocket:
+    server:
+      port: 8081
