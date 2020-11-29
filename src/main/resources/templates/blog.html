@@ -44,31 +44,35 @@
             <div class="ui top attached segment">
                 <div class="ui horizontal link list">
                     <div class="item">
-                        <img src="../static/image/chara01.jpg" alt="" class="ui avatar image">
-                        <div class="content"><a href="#" class="header">陈子濠</a></div>
+                        <img src="../static/image/chara01.jpg" th:src="@{${blog.user.avatar}}" alt=""
+                             class="ui avatar image">
+                        <div class="content"><a href="#" class="header" th:text="${blog.user.nickname}">陈子濠</a></div>
                     </div>
                     <div class="item">
-                        <i class="calendar icon"></i>2020-09-01
+                        <i class="calendar icon"></i><span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2020-09-01</span>
                     </div>
                     <div class="item">
-                        <i class="eye icon"></i>1234
+                        <i class="eye icon"></i><span th:text="${blog.views}">1231</span>
                     </div>
                 </div>
             </div>
             <div class="ui attached segment">
                 <!--图片-->
-                <img src="../static/image/chara01.jpg" alt="" class="ui fluid rounded image">
+                <img src="../static/image/chara01.jpg" th:src="@{$(blog.firstPicture)}" alt=""
+                     class="ui fluid rounded image">
             </div>
             <div class="ui attached padded segment">
                 <!--内容-->
                 <div class="ui segment right aligned basic">
                     <!--有一个疑问，把basic替换成inverted没有效果。之后看到这条注释要去找找原因-->
-                    <div class="ui label basic orange">原创</div>
+                    <div class="ui label basic orange" th:text="${blog.flag}">原创</div>
                 </div>
 
-                <h2 class="ui center aligned  header">并发编程——多线程的认识、基本操作</h2>
+                <h2 class="ui center aligned  header" th:text="${blog.title}">并发编程——多线程的认识、基本操作</h2>
 
-                <div id="content" class="typo typo-selection m-padded-lr-responsive m-padded-tb">
+                <!--主要内容部分-->
+                <div id="content" class="typo typo-selection m-padded-lr-responsive m-padded-tb"
+                     th:utext="${blog.content}">
                     <h2 id="section1">一、关于 <i class="serif">Typo.css</i></h2>
 
                     <pre><code class="language-css">p{color: red }</code></pre>
@@ -430,7 +434,7 @@ h5,h6{font-size:1em;}
 
                 <!--标签 -->
                 <div class="m-padded-lr-responsive">
-                    <div class="ui basic teal left label">方法</div>
+                    <div class="ui basic teal left label" th:each="tag:${blog.tags}" th:text="${tag.name}">方法</div>
                 </div>
                 <!--赞赏-->
                 <div class="ui center aligned basic segment">
@@ -440,11 +444,13 @@ h5,h6{font-size:1em;}
                     <div class="ui yellow basic label">
                         <div class="ui images" style="font-size: inherit!important;">
                             <div class="image">
-                                <img src="../static/image/wechat.jpg" alt="" class="ui rounded bordered image" style="width: 120px">
+                                <img src="../static/image/wechat.jpg" alt="" th:src="@{/image/wechat.jpg}"
+                                     class="ui rounded bordered image" style="width: 120px">
                                 <div>微信</div>
                             </div>
                             <div class="image">
-                                <img src="../static/image/wechat.jpg" alt="" class="ui rounded bordered image" style="width: 120px">
+                                <img src="../static/image/wechat.jpg" alt="" th:src="@{/image/wechat.jpg}"
+                                     class="ui rounded bordered image" style="width: 120px">
                                 <div>支付宝</div>
                             </div>
                         </div>
@@ -456,14 +462,17 @@ h5,h6{font-size:1em;}
                 <div class="ui middle aligned grid">
                     <div class="eleven wide column">
                         <ui class="list">
-                            <li>作者：陈子濠（联系我）</li>
-                            <li>发表时间：2020-9-10 09：08：11</li>
+                            <li>作者：<span th:text="${blog.user.nickname}">陈子濠</span> <a href="#" th:href="@{/about}"
+                                                                                       target="_blank">（联系我）</a></li>
+                            <li>发表时间：<span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd HH:mm')}">2020-9-10 09：08：11</span>
+                            </li>
                             <li>版权声明：自由转载-非商用-非衍生-保持署名</li>
                             <li>公众号转载：文末添加作者公众号二维码</li>
                         </ui>
                     </div>
                     <div class="five wide column">
-                        <img src="../static/image/wechat.jpg" alt="" class="ui rounded bordered image" style="width: 110px">
+                        <img src="../static/image/wechat.jpg" th:src="@{/image/wechat.jpg}" alt=""
+                             class="ui rounded bordered image" style="width: 110px">
                     </div>
                 </div>
             </div>
