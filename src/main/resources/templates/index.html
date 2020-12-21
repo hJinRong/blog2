@@ -95,7 +95,7 @@
                                 </div>
                                 <div class="five wide column">
                                     <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
-                                        <img src="../static/image/chara01.jpg" th:src="@{$(blog.firstPicture)}" alt=""
+                                        <img src="../static/image/chara01.jpg" th:src="@{${blog.firstPicture}}" alt=""
                                              class="ui rounded image m-image">
                                     </a>
                                 </div>
@@ -235,6 +235,7 @@
         $(".menu.toggle").click(function(){
             $(".m-item").toggleClass("m-mobile-hide");
         } );
+
     </script>
 
 </body>

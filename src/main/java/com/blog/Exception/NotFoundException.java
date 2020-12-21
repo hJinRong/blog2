@@ -1,4 +1,4 @@
-package com.blog;
+package com.blog.Exception;
 
 
 import org.springframework.http.HttpStatus;

@@ -8,4 +8,10 @@ spring:
         cache: false
     profiles:
         active: dev
+    servlet:
+      multipart:
+        enabled: true #允许上传文件
+        max-file-size: 200MB
+        max-request-size: 200MB
+
 

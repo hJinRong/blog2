@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="admin/_fragment :: head(~{::title})">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>博客管理</title>
@@ -9,6 +9,7 @@
           th:href="@{/lib/editormd/css/editormd.min.css}">
     <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}">
     <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/me.css}" href="../../static/css/me.css">
 
 </head>
 <body>
@@ -52,7 +53,8 @@
 <!--中间内容-->
 <div class="m-container m-padded-tb-large">
     <div class="ui container">
-        <form action="#" id="blog-form" th:object="${blog}" th:action="@{/admin/blogs}" method="post" class="ui form">
+        <form action="#" id="blog-form" th:object="${blog}" th:action="@{/admin/blogs}" method="post" class="ui form"
+              enctype="multipart/form-data">
             <input type="hidden" name="published">
             <input type="hidden" name="id" th:value="*{id}">
             <div class="required field">
@@ -108,11 +110,20 @@
                     </div>
                 </div>
         </div>
-
             <div class="required field">
                 <div class="ui left labeled input">
                     <label class="ui teal basic label">首图</label>
-                    <input type="text" name="firstPicture" th:value="*{firstPicture}" placeholder="首图引用地址">
+                    <input type="hidden" name="picture">
+                    <input class="file-upload-input" name="files" type="file"
+                           style="position: absolute; z-index: -9999; height: 0px; width: 0px; padding: 0px; margin: 0px; line-height: 0; outline: currentcolor none 0px; border: 0px none; opacity: 0;">
+                    <input type="file" name="firstPicture" style="display:none" id="upload_input"
+                           th:value="*{firstPicture}" placeholder="首图引用地址">
+                    <div class="fileuploader-input">
+                        <button id="load_btn" type="button" class="fileuploader-input-button btn btn-secondary btn-sm">
+                            <span>选择文件</span>
+                        </button>
+                    </div>
+
                 </div>
             </div>
             <div class="required field">
@@ -237,6 +248,22 @@
         $('#blog-form').submit();
     });
 
+    // 上传图片
+    $('#upload_btn').click(function () {
+        $('#upload_input').click();
+    });
+
+    $('#upload_input').on('change', function () {
+        var filePath = $(this).val();         //获取到input的value，里面是文件的路径
+        var fileFormat = filePath.substring(filePath.lastIndexOf(".")).toLowerCase();
+        // 检查是否是图片
+        if (!fileFormat.match(/.png|.jpg|.jpeg/)) {
+            error_prompt_alert('上传错误,文件格式必须为：png/jpg/jpeg');
+            return;
+        }
+        var src = window.URL.createObjectURL(this.files[0]); //转成可以在本地预览的格式
+        $('#cropedBigImg').attr('src', src);
+    });
 
     // 暂时不支持在编辑文章的时候新建标签，问题点：不知道怎么在写文章的时候吧tag的id传入controll层
     // $('.ui.tag.dropdown')

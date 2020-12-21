@@ -8,3 +8,12 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  logging:
+    file: ./logs/log.log
+    level:
+      org:
+        springframework:
+          boot:
+            autoconfigure: error
+#        web:
+#          trace
